@@ -1,0 +1,420 @@
+:root {
+    --fondo: #f3f6fb;
+    --superficie: #ffffff;
+    --texto: #1b2437;
+    --texto-suave: #63708a;
+    --borde: #e3e9f4;
+    --primario: #4f46e5;
+    --primario-oscuro: #3730a3;
+    --acento: #06b6d4;
+    --sombra: 0 12px 32px rgba(23, 34, 59, 0.08);
+    --radio: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--texto);
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(79, 70, 229, 0.12), transparent 34rem),
+        radial-gradient(circle at 88% 8%, rgba(6, 182, 212, 0.12), transparent 32rem),
+        var(--fondo);
+}
+
+/* ===== Barra de navegación ===== */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem clamp(1rem, 5vw, 3.5rem);
+    color: #ffffff;
+    background: linear-gradient(120deg, #111c3f, #312e81 55%, #0e7490);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+}
+
+nav .marca {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+nav .separador {
+    opacity: 0.45;
+}
+
+nav .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-left: auto;
+}
+
+nav a {
+    padding: 0.45rem 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Contenido ===== */
+main {
+    flex: 1;
+    width: min(1080px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3rem) 0 4rem;
+    animation: aparecer 0.45s ease both;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main h1 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: 0 0 1.5rem;
+    color: #16203a;
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+main h1::before {
+    content: "";
+    width: 0.35rem;
+    height: 1.6em;
+    border-radius: 99px;
+    background: linear-gradient(180deg, var(--primario), var(--acento));
+    box-shadow: 0 0 18px rgba(79, 70, 229, 0.35);
+}
+
+main p {
+    margin: 0.55rem 0;
+    color: #334155;
+}
+
+main strong {
+    color: #16203a;
+}
+
+/* ===== Aviso informativo (componente x-alerta) ===== */
+.alerta {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin: 0 0 1.5rem;
+    padding: 0.95rem 1.1rem;
+    color: #0c4a6e;
+    font-size: 0.95rem;
+    background: linear-gradient(135deg, #e0f2fe, #ecfeff);
+    border: 1px solid #bae6fd;
+    border-left: 4px solid var(--acento);
+    border-radius: 12px;
+}
+
+.alerta::before {
+    content: "i";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 1.35rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.1rem;
+    color: #ffffff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 50%;
+    background: var(--acento);
+}
+
+/* ===== Mensaje flash de éxito ===== */
+main > div[style*="color: green"] {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding: 0.9rem 1.1rem;
+    color: #047857 !important;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ecfdf5, #f0fdfa);
+    border: 1px solid #a7f3d0;
+    border-left: 4px solid #10b981;
+    border-radius: 12px;
+}
+
+main > div[style*="color: green"]::before {
+    content: "✓";
+    font-weight: 800;
+}
+
+/* ===== Listas convertidas en tarjetas ===== */
+main ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+main li {
+    position: relative;
+    padding: 1.15rem 1.25rem;
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: 0 6px 18px rgba(23, 34, 59, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+main li:hover {
+    transform: translateY(-3px);
+    border-color: #c7d2fe;
+    box-shadow: var(--sombra);
+}
+
+main li a {
+    display: inline-block;
+    margin-left: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    color: var(--primario);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: #eef2ff;
+    border-radius: 999px;
+    transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+main li a:hover {
+    color: #ffffff;
+    background: var(--primario);
+}
+
+/* ===== Formularios ===== */
+main form {
+    max-width: 560px;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+main form > div {
+    margin-bottom: 1.1rem;
+}
+
+main label {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+main input[type="text"],
+main input[type="email"],
+main input[type="number"],
+main input[type="password"],
+main select,
+main textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    color: var(--texto);
+    font: inherit;
+    background: #fbfdff;
+    border: 1.5px solid var(--borde);
+    border-radius: 10px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+main input:focus,
+main select:focus,
+main textarea:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: var(--primario);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.13);
+}
+
+main button[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.4rem;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--primario), #7c3aed 60%, var(--acento));
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+main button[type="submit"]:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+    box-shadow: 0 14px 26px rgba(79, 70, 229, 0.32);
+}
+
+main button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ===== Formulario de eliminar dentro de las tarjetas ===== */
+main li form {
+    display: inline;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+main li form button[type="submit"] {
+    display: inline-block;
+    margin-left: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    color: #b91c1c;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 999px;
+    box-shadow: none;
+    cursor: pointer;
+    transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+main li form button[type="submit"]:hover {
+    color: #ffffff;
+    background: #dc2626;
+    border-color: #dc2626;
+    transform: none;
+    filter: none;
+    box-shadow: none;
+}
+
+main li form button[type="submit"]:active {
+    transform: none;
+}
+
+/* ===== Errores de validación ===== */
+main form div[style*="color:red"],
+main form div[style*="color: red"] {
+    margin-top: 0.45rem;
+    padding: 0.5rem 0.7rem;
+    color: #b91c1c !important;
+    font-size: 0.85rem !important;
+    font-weight: 600;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+}
+
+/* ===== Enlaces tipo botón ===== */
+main p a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    color: var(--primario);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: #eef2ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 9px;
+    transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+main p a:hover {
+    color: #ffffff;
+    background: var(--primario);
+    border-color: var(--primario);
+}
+
+/* ===== Pie de página ===== */
+footer {
+    padding: 1.25rem clamp(1rem, 5vw, 3.5rem);
+    color: #94a3b8;
+    font-size: 0.85rem;
+    text-align: center;
+    border-top: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+::selection {
+    color: #ffffff;
+    background: var(--primario);
+}
+
+@media (max-width: 640px) {
+    nav {
+        justify-content: center;
+    }
+
+    nav .nav-links {
+        justify-content: center;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    main ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main {
+        animation: none;
+    }
+
+    main li,
+    main button[type="submit"] {
+        transition: none;
+    }
+}
