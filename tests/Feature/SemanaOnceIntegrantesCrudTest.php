@@ -128,4 +128,35 @@ class SemanaOnceIntegrantesCrudTest extends TestCase
             'rol' => 'Miembro',
         ]);
     }
+
+    public function test_lista_ordena_alfabeticamente_y_muestra_el_total(): void
+    {
+        Integrante::create(['nombre' => 'Zulema Rojas', 'rol' => 'Miembro']);
+        Integrante::create(['nombre' => 'Ana Torres', 'rol' => 'Miembro']);
+        Integrante::create(['nombre' => 'Marco Diaz', 'rol' => 'Coordinador']);
+
+        $response = $this->get('/integrantes');
+
+        $response->assertStatus(200);
+        $response->assertSee('Nuestro equipo (3 integrantes)');
+        $response->assertSeeInOrder(['Ana Torres', 'Marco Diaz', 'Zulema Rojas']);
+        $response->assertSee('- Miembro');
+        $response->assertSee('★ Coordinador');
+        $response->assertSee('Eliminar');
+    }
+
+    public function test_destroy_elimina_un_integrante_y_redirige_con_mensaje(): void
+    {
+        $integrante = Integrante::create([
+            'nombre' => 'Hugo Florez',
+            'rol' => 'Miembro',
+        ]);
+
+        $response = $this->delete('/integrantes/'.$integrante->id);
+
+        $response->assertRedirect('/integrantes');
+        $response->assertSessionHas('mensaje', 'Integrante eliminado.');
+        $this->assertDatabaseMissing('integrantes', ['id' => $integrante->id]);
+        $this->assertDatabaseCount('integrantes', 0);
+    }
 }

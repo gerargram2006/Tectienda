@@ -10,10 +10,13 @@ class IntegranteController extends Controller
     // Mostrar todos los integrantes
     public function index()
     {
-        // Traemos todos los integrantes de la tabla
-        $integrantes = Integrante::all();
+        // Traemos los integrantes ordenados alfabéticamente por nombre
+        $integrantes = Integrante::orderBy('nombre')->get();
 
-        return view('integrantes.index', compact('integrantes'));
+        // Contamos el total de integrantes
+        $total = Integrante::count();
+
+        return view('integrantes.index', compact('integrantes', 'total'));
     }
 
     // Mostrar un solo integrante
@@ -65,5 +68,14 @@ class IntegranteController extends Controller
         $integrante->update($request->only('nombre', 'rol'));
 
         return redirect('/integrantes')->with('mensaje', 'Integrante actualizado.');
+    }
+
+    // Eliminar un integrante
+    public function destroy($id)
+    {
+        $integrante = Integrante::findOrFail($id);
+        $integrante->delete();
+
+        return redirect('/integrantes')->with('mensaje', 'Integrante eliminado.');
     }
 }
