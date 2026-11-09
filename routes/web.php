@@ -12,7 +12,13 @@ Route::get('/', function () {
 // Catálogo de Productos
 Route::get('/productos', [ProductoController::class, 'index']);
 
-// Detalle de Producto por ID
+// Rutas de productos (CRUD)
+Route::get('/productos/create', [ProductoController::class, 'create']);
+Route::post('/productos', [ProductoController::class, 'store']);
+Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
+Route::put('/productos/{id}', [ProductoController::class, 'update']);
+
+// Detalle de Producto por ID (al final para no capturar /productos/create)
 Route::get('/productos/{id}', [ProductoController::class, 'show']);
 
 // Ruta para agregar al carrito

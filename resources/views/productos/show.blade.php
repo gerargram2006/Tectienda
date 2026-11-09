@@ -15,5 +15,8 @@
             - Disponible
         @endif
     </p>
-    <p><a href="{{ url('/productos') }}">← Volver al catálogo</a></p>
+    <p>
+        <a href="/productos/{{ $producto->id }}/edit">Editar producto</a>
+        <a href="{{ url('/productos') }}">← Volver al catálogo</a>
+    </p>
 @endsection

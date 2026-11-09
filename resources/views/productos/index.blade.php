@@ -3,6 +3,10 @@
 @section('contenido')
     <h1>Catálogo</h1>
     <x-alerta>Revisa nuestras ofertas en tecnología</x-alerta>
+    @if (session('mensaje'))
+        <div style="color: green;">{{ session('mensaje') }}</div>
+    @endif
+    <p><a href="/productos/create">+ Registrar producto</a></p>
     <ul>
     @forelse ($productos as $p)
         <li>{{ $p->nombre }}
@@ -13,6 +17,8 @@
             @else
                 - Disponible
             @endif
+            - <a href="/productos/{{ $p->id }}">Ver</a>
+            - <a href="/productos/{{ $p->id }}/edit">Editar</a>
         </li>
     @empty
         <li>Todavía no hay productos.</li>
