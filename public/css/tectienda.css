@@ -122,6 +122,13 @@ main h1::before {
     box-shadow: 0 0 18px rgba(79, 70, 229, 0.35);
 }
 
+main h2 {
+    margin: 2.25rem 0 1rem;
+    color: #16203a;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+}
+
 main p {
     margin: 0.55rem 0;
     color: #334155;
@@ -353,6 +360,67 @@ main form div[style*="color: red"] {
     background: #fef2f2;
     border: 1px solid #fecaca;
     border-radius: 8px;
+}
+
+/* ===== Tablas de reporte ===== */
+.tabla-contenedor {
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+main table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+main table thead th {
+    padding: 0.9rem 1.1rem;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    background: linear-gradient(120deg, #111c3f, #312e81 60%, #0e7490);
+}
+
+main table tbody td {
+    padding: 0.85rem 1.1rem;
+    color: #334155;
+    border-bottom: 1px solid #eef2f7;
+}
+
+main table tbody tr:nth-child(even) {
+    background: #fafbfe;
+}
+
+main table tbody tr:hover {
+    background: #eef2ff;
+}
+
+main table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+main table td:last-child,
+main table th:last-child {
+    text-align: right;
+    font-weight: 700;
+    color: var(--primario);
+}
+
+main table tfoot td {
+    padding: 0.95rem 1.1rem;
+    color: #16203a;
+    font-weight: 800;
+    background: #eef2ff;
+    border-top: 2px solid #e0e7ff;
 }
 
 /* ===== Enlaces tipo botón ===== */

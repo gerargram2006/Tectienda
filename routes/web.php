@@ -4,6 +4,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\IntegranteController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReporteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,4 +36,6 @@ Route::put('/integrantes/{id}', [IntegranteController::class, 'update']);
 Route::delete('/integrantes/{id}', [IntegranteController::class, 'destroy']);
 
 // Detalle de Integrante por ID (al final para no capturar /integrantes/create)
-Route::get('/integrantes/{id}', [IntegranteController::class, 'show']);
+Route::get('/integrante /{id}', [IntegranteController::class, 'show']);
+
+Route::get('/reporte', [ReporteController::class, 'index']);
