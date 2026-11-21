@@ -68,4 +68,13 @@ class ProductoController extends Controller
 
         return redirect('/productos')->with('mensaje', 'Producto actualizado.');
     }
+
+    // Eliminar un producto existente
+    public function destroy($id)
+    {
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
+
+        return redirect('/productos')->with('mensaje', 'Producto eliminado.');
+    }
 }

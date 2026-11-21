@@ -1,27 +1,45 @@
 @extends('layouts.app')
-@section('titulo', 'Catálogo')
+
+@section('titulo', 'Catálogo de Productos')
+
 @section('contenido')
-    <h1>Catálogo</h1>
-    <x-alerta>Revisa nuestras ofertas en tecnología</x-alerta>
-    @if (session('mensaje'))
-        <div style="color: green;">{{ session('mensaje') }}</div>
-    @endif
-    <p><a href="/productos/create">+ Registrar producto</a></p>
-    <ul>
-    @forelse ($productos as $p)
-        <li>{{ $p->nombre }}
-            @if ($p->stock == 0)
-                - Agotado
-            @elseif ($p->stock < 5)
-                - ¡Últimas unidades!
-            @else
-                - Disponible
-            @endif
-            - <a href="/productos/{{ $p->id }}">Ver</a>
-            - <a href="/productos/{{ $p->id }}/edit">Editar</a>
-        </li>
-    @empty
-        <li>Todavía no hay productos.</li>
-    @endforelse
-    </ul>
+    <h1>Catálogo de TecTienda</h1>
+
+    @auth
+        <div style="margin-bottom: 15px;">
+            <a href="/productos/create">+ Nuevo producto</a>
+        </div>
+    @endauth
+
+    <table border="1" style="width: 100%; text-align: left;">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                @auth
+                    <th>Acciones</th>
+                @endauth
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($productos as $producto)
+                <tr>
+                    <td>{{ $producto->nombre }}</td>
+                    <td>S/ {{ $producto->precio }}</td>
+                    <td>{{ $producto->stock }}</td>
+                    @auth
+                        <td>
+                            <a href="/productos/{{ $producto->id }}/edit">Editar</a>
+                            <form method="POST" action="/productos/{{ $producto->id }}" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Eliminar</button>
+                            </form>
+                        </td>
+                    @endauth
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection

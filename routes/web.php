@@ -2,22 +2,29 @@
 
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\IntegranteController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductoController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReporteController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/productos');
 
-// Catálogo de Productos
+// Rutas de autenticación
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+Route::post('/logout', [LoginController::class, 'destroy']);
+
+// Catálogo abierto para todos los visitantes
 Route::get('/productos', [ProductoController::class, 'index']);
 
-// Rutas de productos (CRUD)
-Route::get('/productos/create', [ProductoController::class, 'create']);
-Route::post('/productos', [ProductoController::class, 'store']);
-Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
-Route::put('/productos/{id}', [ProductoController::class, 'update']);
+// Rutas protegidas: solo empleados con sesión iniciada
+Route::middleware('auth')->group(function () {
+    Route::get('/productos/create', [ProductoController::class, 'create']);
+    Route::post('/productos', [ProductoController::class, 'store']);
+    Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
+    Route::put('/productos/{id}', [ProductoController::class, 'update']);
+    Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
+});
 
 // Detalle de Producto por ID (al final para no capturar /productos/create)
 Route::get('/productos/{id}', [ProductoController::class, 'show']);
