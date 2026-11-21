@@ -11,7 +11,8 @@
         </div>
     @endauth
 
-    <table border="1" style="width: 100%; text-align: left;">
+    <div class="tabla-contenedor">
+    <table class="tabla">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -42,4 +43,5 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 @endsection

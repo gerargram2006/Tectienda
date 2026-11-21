@@ -43,6 +43,6 @@ Route::put('/integrantes/{id}', [IntegranteController::class, 'update']);
 Route::delete('/integrantes/{id}', [IntegranteController::class, 'destroy']);
 
 // Detalle de Integrante por ID (al final para no capturar /integrantes/create)
-Route::get('/integrante /{id}', [IntegranteController::class, 'show']);
+Route::get('/integrantes/{id}', [IntegranteController::class, 'show']);
 
 Route::get('/reporte', [ReporteController::class, 'index']);
