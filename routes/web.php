@@ -46,3 +46,6 @@ Route::delete('/integrantes/{id}', [IntegranteController::class, 'destroy']);
 Route::get('/integrantes/{id}', [IntegranteController::class, 'show']);
 
 Route::get('/reporte', [ReporteController::class, 'index']);
+
+// Tablero de progreso del proyecto
+Route::get('/resumen', [ResumenController::class, 'index']);
